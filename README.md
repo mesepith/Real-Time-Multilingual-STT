@@ -172,15 +172,15 @@ Create:
 
     RewriteEngine On
 
-    # Don't rewrite static assets
+    # Never rewrite static assets
     RewriteRule ^assets/ - [L]
     RewriteRule ^vite\.svg$ - [L]
 
-    # Don't rewrite API / WS
+    # Never rewrite API / WS
     RewriteRule ^api/ - [L]
     RewriteRule ^ws$ - [L]
 
-    # Serve real files/dirs
+    # Serve real files/dirs as-is
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
@@ -192,17 +192,18 @@ Create:
   ProxyPreserveHost On
   RequestHeader set X-Forwarded-Proto "https"
 
-  # REST API
   ProxyPass        /api http://127.0.0.1:7059/api
   ProxyPassReverse /api http://127.0.0.1:7059/api
 
-  # WebSocket
   ProxyPass        /ws ws://127.0.0.1:7059/ws
   ProxyPassReverse /ws ws://127.0.0.1:7059/ws
+  
+  ErrorLog ${APACHE_LOG_DIR}/stt-demo-error.log
+  CustomLog ${APACHE_LOG_DIR}/stt-demo-access.log combined
 
-  SSLCertificateFile /etc/letsencrypt/live/stt-demo.example.com/fullchain.pem
-  SSLCertificateKeyFile /etc/letsencrypt/live/stt-demo.example.com/privkey.pem
-  Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/stt-demo.example.com/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/stt-demo.example.com/privkey.pem
+Include /etc/letsencrypt/options-ssl-apache.conf
 </VirtualHost>
 ```
 
