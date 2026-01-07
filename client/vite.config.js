@@ -5,12 +5,15 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 7058,
-    strictPort: true,
     proxy: {
-      "/api": "http://localhost:7059",
-    },
-  },
-  build: {
-    outDir: "build", // you said you typically deploy a "build" folder
-  },
+      "/api": {
+        target: "http://localhost:7059",
+        changeOrigin: true
+      },
+      "/ws": {
+        target: "ws://localhost:7059",
+        ws: true
+      }
+    }
+  }
 });
