@@ -236,26 +236,30 @@ export default function App() {
       <div className="header">
         <div>
           <h2 style={{ margin: 0 }}>Demo STT (Nova-3 multilingual)</h2>
-          <div style={{ color: "#555", marginTop: 6 }}>
-            Status: <b>{status}</b>
+          <div className="subhead">
+            <span>Status: <b>{status}</b></span>
+            <span className="dot">•</span>
+            {!isOn ? (
+              <span>Click <b>Start</b> and speak (you can mix languages). Click <b>Stop</b> to end.</span>
+            ) : (
+              <span>Listening… speak now. Click <b>Stop</b> when done.</span>
+            )}
           </div>
         </div>
 
         {!isOn ? (
           <button className="micBtn" onClick={start} title="Start mic">
-            🎤
+            <span className="micGlyph">🎤</span>
+            <span className="micText">Start</span>
           </button>
         ) : (
-          <button
-            className="micBtn listening"
-            onClick={stop}
-            title="Stop mic"
-            style={{ background: "#b00020" }}
-          >
-            ⏹
+          <button className="micBtn listening" onClick={stop} title="Stop mic">
+            <span className="micGlyph">⏹</span>
+            <span className="micText">Stop</span>
           </button>
         )}
       </div>
+
 
       {error ? (
         <div className="card" style={{ borderColor: "#ffcccc", background: "#fff5f5" }}>
@@ -265,11 +269,15 @@ export default function App() {
       ) : null}
 
       <div className="card">
-        <div style={{ fontSize: 12, color: "#666", marginBottom: 8 }}>
-          Live transcript (interim + final)
+        <div className="cardTitle">Live transcript (interim + final)</div>
+
+        <div className={(!finalText && !interimText) ? "transcriptHint" : "transcriptText"}>
+          {(!finalText && !interimText)
+            ? "Tip: Click Start and begin speaking. You can switch languages mid-sentence."
+            : displayText}
         </div>
-        <div style={{ fontSize: 18, lineHeight: 1.5 }}>{displayText}</div>
       </div>
+
 
       <div className="card">
         <div style={{ fontSize: 12, color: "#666", marginBottom: 8 }}>Metrics</div>

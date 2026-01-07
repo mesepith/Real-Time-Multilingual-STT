@@ -7,24 +7,43 @@
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
+.subhead {
+  margin-top: 8px;
+  color: #555;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dot { opacity: 0.5; }
+
 .micBtn {
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
   border: none;
   cursor: pointer;
-  font-size: 22px;
-  display: grid;
-  place-items: center;
-  background: #111;
-  color: white;
+  border-radius: 999px;
+  padding: 14px 18px;
+  background: #0fae59;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  min-width: 120px;
+  justify-content: center;
   position: relative;
+}
+
+.micBtn.listening {
+  background: #b00020;
 }
 
 .micBtn.listening::after {
@@ -32,8 +51,28 @@
   position: absolute;
   inset: -10px;
   border-radius: 999px;
-  border: 2px solid rgba(17, 17, 17, 0.35);
+  border: 2px solid rgba(176, 0, 32, 0.35);
   animation: pulse 1.2s infinite;
+}
+
+.micGlyph { font-size: 18px; }
+.micText { letter-spacing: 0.2px; }
+
+.cardTitle {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.transcriptHint {
+  font-size: 16px;
+  color: #777;
+  line-height: 1.5;
+}
+
+.transcriptText {
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 @keyframes pulse {
