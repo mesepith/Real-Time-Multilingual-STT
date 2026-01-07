@@ -200,10 +200,6 @@ Create:
   
   ErrorLog ${APACHE_LOG_DIR}/stt-demo-error.log
   CustomLog ${APACHE_LOG_DIR}/stt-demo-access.log combined
-
-SSLCertificateFile /etc/letsencrypt/live/stt-demo.example.com/fullchain.pem
-SSLCertificateKeyFile /etc/letsencrypt/live/stt-demo.example.com/privkey.pem
-Include /etc/letsencrypt/options-ssl-apache.conf
 </VirtualHost>
 ```
 
